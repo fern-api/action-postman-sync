@@ -40,9 +40,9 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 const core = __importStar(__nccwpck_require__(2186));
+const postman_collection_1 = __nccwpck_require__(6435);
 const postman_sdk_1 = __nccwpck_require__(3062);
 const promises_1 = __nccwpck_require__(9225);
-const postman_collection_1 = __nccwpck_require__(6435);
 function run() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
@@ -59,11 +59,10 @@ function run() {
                 workspace: postmanWorkspaceId,
             });
             if (!collectionMetadataResponse.ok) {
-                throw new Error("Failed to load collection metadata: " +
-                    collectionMetadataResponse.error);
+                throw new Error(`Failed to load collection metadata: ${JSON.stringify(collectionMetadataResponse.error)}`);
             }
-            const collectionMetadata = collectionMetadataResponse.body.collections.find((collectionMetadata) => {
-                collectionMetadata.name === postmanCollection.info.name;
+            const collectionMetadata = collectionMetadataResponse.body.collections.find((collectionMetadataItem) => {
+                collectionMetadataItem.name === postmanCollection.info.name;
             });
             const collectionDefinition = Object.assign(Object.assign({}, postmanCollection), { auth: postmanCollection.auth != null
                     ? postmanCollection.auth._visit({
@@ -84,8 +83,7 @@ function run() {
                     },
                 });
                 if (!updateCollectionResponse.ok) {
-                    throw new Error("Failed to update collection: " +
-                        updateCollectionResponse.error);
+                    throw new Error(`Failed to update collection: ${JSON.stringify(updateCollectionResponse.error)}`);
                 }
                 core.info(`Successfully updated collection!`);
             }
@@ -97,8 +95,7 @@ function run() {
                     },
                 });
                 if (!createCollectionResponse.ok) {
-                    throw new Error("Failed to create collection: " +
-                        createCollectionResponse.error);
+                    throw new Error(`Failed to create collection: ${JSON.stringify(createCollectionResponse.error)}`);
                 }
                 core.info(`Successfully created collection!`);
             }
@@ -13581,7 +13578,7 @@ module["exports"] = [
 
 /***/ }),
 
-/***/ 1020:
+/***/ 6623:
 /***/ ((module) => {
 
 module["exports"] = [
@@ -13619,13 +13616,13 @@ module["exports"] = [
 
 /***/ }),
 
-/***/ 5180:
+/***/ 4098:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
 var database = {};
 module['exports'] = database;
 database.collation = __nccwpck_require__(1985);
-database.column = __nccwpck_require__(1020);
+database.column = __nccwpck_require__(6623);
 database.engine = __nccwpck_require__(4043);
 database.type = __nccwpck_require__(5227);
 
@@ -13864,7 +13861,7 @@ credit_card.jcb = __nccwpck_require__(9422);
 credit_card.switch = __nccwpck_require__(4015);
 credit_card.solo = __nccwpck_require__(297);
 credit_card.maestro = __nccwpck_require__(1428);
-credit_card.laser = __nccwpck_require__(4962);
+credit_card.laser = __nccwpck_require__(3454);
 credit_card.instapayment = __nccwpck_require__(6613)
 
 
@@ -13892,7 +13889,7 @@ module["exports"] = [
 
 /***/ }),
 
-/***/ 4962:
+/***/ 3454:
 /***/ ((module) => {
 
 module["exports"] = [
@@ -14887,7 +14884,7 @@ en.address = __nccwpck_require__(625);
 en.animal = __nccwpck_require__(6522);
 en.company = __nccwpck_require__(7588);
 en.internet = __nccwpck_require__(4553);
-en.database = __nccwpck_require__(5180);
+en.database = __nccwpck_require__(4098);
 en.lorem = __nccwpck_require__(1351);
 en.name = __nccwpck_require__(2206);
 en.phone_number = __nccwpck_require__(2414);
@@ -20994,7 +20991,7 @@ module['exports'] = name;
 name.male_first_name = __nccwpck_require__(1755);
 name.female_first_name = __nccwpck_require__(9930);
 name.first_name = __nccwpck_require__(790);
-name.last_name = __nccwpck_require__(6031);
+name.last_name = __nccwpck_require__(2437);
 name.binary_gender = __nccwpck_require__(2516);
 name.gender = __nccwpck_require__(5920);
 name.prefix = __nccwpck_require__(3978);
@@ -21004,7 +21001,7 @@ name.name = __nccwpck_require__(5515);
 
 /***/ }),
 
-/***/ 6031:
+/***/ 2437:
 /***/ ((module) => {
 
 module["exports"] = [
@@ -30406,7 +30403,7 @@ module["exports"] = Vehicle;
 
 /***/ }),
 
-/***/ 4069:
+/***/ 7214:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
 var Faker = __nccwpck_require__(1752);
@@ -31411,7 +31408,7 @@ __export(enum_exports, {
   enum_: () => enum_
 });
 module.exports = __toCommonJS(enum_exports);
-var import_identity = __nccwpck_require__(2437);
+var import_identity = __nccwpck_require__(6315);
 function enum_(_values) {
   return (0, import_identity.createIdentitySchemaCreator)()();
 }
@@ -31532,7 +31529,7 @@ function identity() {
 
 /***/ }),
 
-/***/ 2437:
+/***/ 6315:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
 "use strict";
@@ -31590,7 +31587,7 @@ var builders_exports = {};
 module.exports = __toCommonJS(builders_exports);
 __reExport(builders_exports, __nccwpck_require__(5401), module.exports);
 __reExport(builders_exports, __nccwpck_require__(584), module.exports);
-__reExport(builders_exports, __nccwpck_require__(2437), module.exports);
+__reExport(builders_exports, __nccwpck_require__(6315), module.exports);
 __reExport(builders_exports, __nccwpck_require__(6738), module.exports);
 __reExport(builders_exports, __nccwpck_require__(7959), module.exports);
 __reExport(builders_exports, __nccwpck_require__(7724), module.exports);
@@ -31634,14 +31631,14 @@ __export(lazy_exports, {
   lazyObject: () => import_lazyObject.lazyObject
 });
 module.exports = __toCommonJS(lazy_exports);
-var import_lazy = __nccwpck_require__(3313);
+var import_lazy = __nccwpck_require__(1831);
 var import_lazyObject = __nccwpck_require__(2372);
 //# sourceMappingURL=index.js.map
 
 
 /***/ }),
 
-/***/ 3313:
+/***/ 1831:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
 "use strict";
@@ -31725,7 +31722,7 @@ module.exports = __toCommonJS(lazyObject_exports);
 var import_object = __nccwpck_require__(1459);
 var import_object_like = __nccwpck_require__(9563);
 var import_schema_utils = __nccwpck_require__(961);
-var import_lazy = __nccwpck_require__(3313);
+var import_lazy = __nccwpck_require__(1831);
 function lazyObject(getter) {
   const baseSchema = {
     ...import_object_like.OBJECT_LIKE_BRAND,
@@ -31879,7 +31876,7 @@ __export(stringLiteral_exports, {
   stringLiteral: () => stringLiteral
 });
 module.exports = __toCommonJS(stringLiteral_exports);
-var import_identity = __nccwpck_require__(2437);
+var import_identity = __nccwpck_require__(6315);
 function stringLiteral(_value) {
   return (0, import_identity.createIdentitySchemaCreator)()();
 }
@@ -32309,7 +32306,7 @@ __export(any_exports, {
   any: () => any
 });
 module.exports = __toCommonJS(any_exports);
-var import_identity = __nccwpck_require__(2437);
+var import_identity = __nccwpck_require__(6315);
 const any = (0, import_identity.createIdentitySchemaCreator)();
 //# sourceMappingURL=any.js.map
 
@@ -32343,7 +32340,7 @@ __export(boolean_exports, {
   boolean: () => boolean
 });
 module.exports = __toCommonJS(boolean_exports);
-var import_identity = __nccwpck_require__(2437);
+var import_identity = __nccwpck_require__(6315);
 const boolean = (0, import_identity.createIdentitySchemaCreator)();
 //# sourceMappingURL=boolean.js.map
 
@@ -32418,7 +32415,7 @@ __export(number_exports, {
   number: () => number
 });
 module.exports = __toCommonJS(number_exports);
-var import_identity = __nccwpck_require__(2437);
+var import_identity = __nccwpck_require__(6315);
 const number = (0, import_identity.createIdentitySchemaCreator)();
 //# sourceMappingURL=number.js.map
 
@@ -32452,7 +32449,7 @@ __export(string_exports, {
   string: () => string
 });
 module.exports = __toCommonJS(string_exports);
-var import_identity = __nccwpck_require__(2437);
+var import_identity = __nccwpck_require__(6315);
 const string = (0, import_identity.createIdentitySchemaCreator)();
 //# sourceMappingURL=string.js.map
 
@@ -32486,7 +32483,7 @@ __export(unknown_exports, {
   unknown: () => unknown
 });
 module.exports = __toCommonJS(unknown_exports);
-var import_identity = __nccwpck_require__(2437);
+var import_identity = __nccwpck_require__(6315);
 const unknown = (0, import_identity.createIdentitySchemaCreator)();
 //# sourceMappingURL=unknown.js.map
 
@@ -33096,7 +33093,7 @@ __export(src_exports, {
   FernPostmanClient: () => import_Client.FernPostmanClient
 });
 module.exports = __toCommonJS(src_exports);
-var FernPostman = __toESM(__nccwpck_require__(7214));
+var FernPostman = __toESM(__nccwpck_require__(9928));
 var import_Client = __nccwpck_require__(9283);
 //# sourceMappingURL=index.js.map
 
@@ -34219,7 +34216,7 @@ __reExport(types_exports, __nccwpck_require__(8870), module.exports);
 
 /***/ }),
 
-/***/ 7214:
+/***/ 9928:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
 "use strict";
@@ -35220,7 +35217,7 @@ const PostmanUrl = core.schemas.object({
 
 /***/ }),
 
-/***/ 6623:
+/***/ 5572:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
 "use strict";
@@ -35322,7 +35319,7 @@ module.exports = __toCommonJS(types_exports);
 __reExport(types_exports, __nccwpck_require__(5431), module.exports);
 __reExport(types_exports, __nccwpck_require__(5511), module.exports);
 __reExport(types_exports, __nccwpck_require__(7906), module.exports);
-__reExport(types_exports, __nccwpck_require__(6623), module.exports);
+__reExport(types_exports, __nccwpck_require__(5572), module.exports);
 __reExport(types_exports, __nccwpck_require__(1864), module.exports);
 __reExport(types_exports, __nccwpck_require__(71), module.exports);
 __reExport(types_exports, __nccwpck_require__(4852), module.exports);
@@ -35853,7 +35850,7 @@ var zlib = __nccwpck_require__(8761);
 var VERSION = __nccwpck_require__(4322).version;
 var transitionalDefaults = __nccwpck_require__(936);
 var AxiosError = __nccwpck_require__(2093);
-var CanceledError = __nccwpck_require__(4098);
+var CanceledError = __nccwpck_require__(6001);
 
 var isHttps = /https:?/;
 
@@ -36266,7 +36263,7 @@ module.exports = function httpAdapter(config) {
 
 /***/ }),
 
-/***/ 3454:
+/***/ 1479:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
 "use strict";
@@ -36281,7 +36278,7 @@ var parseHeaders = __nccwpck_require__(6455);
 var isURLSameOrigin = __nccwpck_require__(3608);
 var transitionalDefaults = __nccwpck_require__(936);
 var AxiosError = __nccwpck_require__(2093);
-var CanceledError = __nccwpck_require__(4098);
+var CanceledError = __nccwpck_require__(6001);
 var parseProtocol = __nccwpck_require__(6107);
 
 module.exports = function xhrAdapter(config) {
@@ -36539,7 +36536,7 @@ var axios = createInstance(defaults);
 axios.Axios = Axios;
 
 // Expose Cancel & CancelToken
-axios.CanceledError = __nccwpck_require__(4098);
+axios.CanceledError = __nccwpck_require__(6001);
 axios.CancelToken = __nccwpck_require__(1587);
 axios.isCancel = __nccwpck_require__(4057);
 axios.VERSION = __nccwpck_require__(4322).version;
@@ -36574,7 +36571,7 @@ module.exports.default = axios;
 "use strict";
 
 
-var CanceledError = __nccwpck_require__(4098);
+var CanceledError = __nccwpck_require__(6001);
 
 /**
  * A `CancelToken` is an object that can be used to request cancellation of an operation.
@@ -36695,7 +36692,7 @@ module.exports = CancelToken;
 
 /***/ }),
 
-/***/ 4098:
+/***/ 6001:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
 "use strict";
@@ -37100,7 +37097,7 @@ var utils = __nccwpck_require__(328);
 var transformData = __nccwpck_require__(9812);
 var isCancel = __nccwpck_require__(4057);
 var defaults = __nccwpck_require__(1626);
-var CanceledError = __nccwpck_require__(4098);
+var CanceledError = __nccwpck_require__(6001);
 
 /**
  * Throws a `CanceledError` if cancellation has been requested.
@@ -37356,7 +37353,7 @@ module.exports = function transformData(data, headers, fns) {
 
 /***/ }),
 
-/***/ 7024:
+/***/ 7672:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
 // eslint-disable-next-line strict
@@ -37391,7 +37388,7 @@ function getDefaultAdapter() {
   var adapter;
   if (typeof XMLHttpRequest !== 'undefined') {
     // For browsers use XHR adapter
-    adapter = __nccwpck_require__(3454);
+    adapter = __nccwpck_require__(1479);
   } else if (typeof process !== 'undefined' && Object.prototype.toString.call(process) === '[object process]') {
     // For node use HTTP adapter
     adapter = __nccwpck_require__(8104);
@@ -37492,7 +37489,7 @@ var defaults = {
   maxBodyLength: -1,
 
   env: {
-    FormData: __nccwpck_require__(7024)
+    FormData: __nccwpck_require__(7672)
   },
 
   validateStatus: function validateStatus(status) {
@@ -41480,7 +41477,7 @@ module.exports.wrap = wrap;
 
 /***/ }),
 
-/***/ 1621:
+/***/ 104:
 /***/ ((module) => {
 
 "use strict";
@@ -41518,7 +41515,7 @@ module.exports = {
 
 /***/ }),
 
-/***/ 6982:
+/***/ 7024:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
 module.exports = __nccwpck_require__(9042);
@@ -60092,7 +60089,7 @@ module.exports = LRUCache
  * Module exports.
  */
 
-module.exports = __nccwpck_require__(9891)
+module.exports = __nccwpck_require__(3313)
 
 
 /***/ }),
@@ -60799,7 +60796,7 @@ var _ = __nccwpck_require__(2).lodash,
     Property = __nccwpck_require__(1160).Property,
     PropertyBase = __nccwpck_require__(2182).PropertyBase,
     Url = __nccwpck_require__(9885).Url,
-    UrlMatchPatternList = __nccwpck_require__(1429).UrlMatchPatternList,
+    UrlMatchPatternList = __nccwpck_require__(1621).UrlMatchPatternList,
 
     STRING = 'string',
     HTTPS = 'https',
@@ -64920,7 +64917,7 @@ var _ = __nccwpck_require__(2).lodash,
     PropertyList = __nccwpck_require__(6837).PropertyList,
     Url = __nccwpck_require__(9885).Url,
     UrlMatchPattern = __nccwpck_require__(4004).UrlMatchPattern,
-    UrlMatchPatternList = __nccwpck_require__(1429).UrlMatchPatternList,
+    UrlMatchPatternList = __nccwpck_require__(1621).UrlMatchPatternList,
     ProxyConfig,
     PROTOCOL_DELIMITER = UrlMatchPattern.PROTOCOL_DELIMITER,
     E = '',
@@ -66399,7 +66396,7 @@ module.exports = {
 var util = __nccwpck_require__(2),
     _ = util.lodash,
     httpReasons = __nccwpck_require__(2992),
-    LJSON = __nccwpck_require__(6982),
+    LJSON = __nccwpck_require__(7024),
     Property = __nccwpck_require__(1160).Property,
     PropertyBase = __nccwpck_require__(2182).PropertyBase,
     Request = __nccwpck_require__(1419).Request,
@@ -69183,7 +69180,7 @@ module.exports = {
     Script: __nccwpck_require__(6030).Script,
     Url: __nccwpck_require__(9885).Url,
     UrlMatchPattern: __nccwpck_require__(4004).UrlMatchPattern,
-    UrlMatchPatternList: __nccwpck_require__(1429).UrlMatchPatternList,
+    UrlMatchPatternList: __nccwpck_require__(1621).UrlMatchPatternList,
     Variable: __nccwpck_require__(8770).Variable,
     VariableList: __nccwpck_require__(4838).VariableList,
     VariableScope: __nccwpck_require__(3832).VariableScope,
@@ -69198,7 +69195,7 @@ module.exports = {
 /***/ 9696:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
-var faker = __nccwpck_require__(4069),
+var faker = __nccwpck_require__(7214),
     uuid = __nccwpck_require__(5840),
 
     // locale list generated from: https://github.com/chromium/chromium/blob/master/ui/base/l10n/l10n_util.cc
@@ -70067,7 +70064,7 @@ module.exports = {
 
 /***/ }),
 
-/***/ 1429:
+/***/ 1621:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
 var _ = __nccwpck_require__(2).lodash,
@@ -76654,7 +76651,7 @@ module.exports = safer
 "use strict";
 
 const os = __nccwpck_require__(2087);
-const hasFlag = __nccwpck_require__(1621);
+const hasFlag = __nccwpck_require__(104);
 
 const env = process.env;
 
@@ -78256,7 +78253,7 @@ module.exports = JSON.parse('{"100":{"name":"Continue","detail":"This means that
 
 /***/ }),
 
-/***/ 9891:
+/***/ 3313:
 /***/ ((module) => {
 
 "use strict";
