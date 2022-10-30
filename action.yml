@@ -1,11 +1,16 @@
-name: 'Your name here'
-description: 'Provide a description here'
-author: 'Your name or organization here'
+name: 'Postman Collection Sync'
+description: 'Github Action to update your postman collection'
+author: 'Fern'
 inputs:
-  milliseconds: # change this
+  api-key:
     required: true
-    description: 'input description here'
-    default: 'default value if applicable'
+    description: 'Postman API Key'
+  workspace-id: 
+    required: true  
+    description: 'Postman Workspace ID for this collection'
+  collection-path: 
+    required: true
+    description: 'Path to the postman collection'
 runs:
   using: 'node16'
   main: 'dist/index.js'

@@ -1,0 +1,189 @@
+{
+	"info": {
+		"_postman_id": "1d3db551-eac5-4d2f-b4f4-cf782e76f886",
+		"name": "PET Store Collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "21510182"
+	},
+	"item": [
+		{
+			"name": "Pet",
+			"item": [
+				{
+					"name": "Add new pet",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": 100,\r\n  \"category\": {\r\n    \"id\": 10,\r\n    \"name\": \"watch dog\"\r\n  },\r\n  \"name\": \"Doggie\",\r\n  \"photoUrls\": [\r\n    \"c:\\\\users\\\\admin\\\\picture\\\\petwatch.jpg\"\r\n  ],\r\n  \"tags\": [\r\n    {\r\n      \"id\": 10,\r\n      \"name\": \"tail bow\"\r\n    }\r\n  ],\r\n  \"status\": \"sold\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://petstore.swagger.io/v2/pet",
+							"protocol": "https",
+							"host": [
+								"petstore",
+								"swagger",
+								"io"
+							],
+							"path": [
+								"v2",
+								"pet"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add new pet by provide Pet id as string.",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": 100,\r\n  \"category\": {\r\n    \"id\": 10,\r\n    \"name\": \"watch dog\"\r\n  },\r\n  \"name\": \"Doggie\",\r\n  \"photoUrls\": [\r\n    \"c:\\\\users\\\\admin\\\\picture\\\\petwatch.jpg\"\r\n  ],\r\n  \"tags\": [\r\n    {\r\n      \"id\": 10,\r\n      \"name\": \"tail bow\"\r\n    }\r\n  ],\r\n  \"status\": \"sold\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://petstore.swagger.io/v2/pet",
+							"protocol": "https",
+							"host": [
+								"petstore",
+								"swagger",
+								"io"
+							],
+							"path": [
+								"v2",
+								"pet"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add new pet by provide Pet name as an integer value.",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\":\"123\",\r\n  \"category\": {\r\n    \"id\": 10,\r\n    \"name\": \"watch dog\"\r\n  },\r\n  \"name\": 777,\r\n  \"photoUrls\": [\r\n    \"c:\\\\users\\\\admin\\\\picture\\\\petwatch.jpg\"\r\n  ],\r\n  \"tags\": [\r\n    {\r\n      \"id\": 10,\r\n      \"name\": \"tail bow\"\r\n    }\r\n  ],\r\n  \"status\": \"Available\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://petstore.swagger.io/v2/pet",
+							"protocol": "https",
+							"host": [
+								"petstore",
+								"swagger",
+								"io"
+							],
+							"path": [
+								"v2",
+								"pet"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add new  Pet by providing photourl as integer",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\":\"125\",\r\n  \"category\": {\r\n    \"id\": 10,\r\n    \"name\": \"watch dog\"\r\n  },\r\n  \"name\": 777,\r\n  \"photoUrls\": [\r\n   879749\r\n  ],\r\n  \"tags\": [\r\n    {\r\n      \"id\": 10,\r\n      \"name\": \"tail bow\"\r\n    }\r\n  ],\r\n  \"status\": \"Available\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://petstore.swagger.io/v2/pet",
+							"protocol": "https",
+							"host": [
+								"petstore",
+								"swagger",
+								"io"
+							],
+							"path": [
+								"v2",
+								"pet"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add new pet by giving same id and other field different",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 100,\r\n    \"category\": {\r\n        \"id\": 10,\r\n        \"name\": \"watch dog\"\r\n    },\r\n    \"name\": \"Doggie1\",\r\n    \"photoUrls\": [\r\n        \"c:\\\\users\\\\admin\\\\picture\\\\petwatch.jpg\"\r\n    ],\r\n    \"tags\": [\r\n        {\r\n            \"id\": 10,\r\n            \"name\": \"tail bow\"\r\n        }\r\n    ],\r\n    \"status\": \"Available\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://petstore.swagger.io/v2/pet",
+							"protocol": "https",
+							"host": [
+								"petstore",
+								"swagger",
+								"io"
+							],
+							"path": [
+								"v2",
+								"pet"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get pet details by giving pet id",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "Get pet details by giving invalid pet id",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "Get pet details by providing pet id as string",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

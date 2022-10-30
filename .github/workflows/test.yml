@@ -21,4 +21,6 @@ jobs:
       - uses: actions/checkout@v2
       - uses: ./
         with:
-          milliseconds: 1000
+          api-key: ${{ secrets.POSTMAN_API_KEY }}
+          workspace-id:  ${{ secrets.TEST_POSTMAN_WORKSPACE_ID }}
+          collection-path: example-collection.json
