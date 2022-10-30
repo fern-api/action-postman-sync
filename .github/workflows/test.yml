@@ -17,10 +17,13 @@ jobs:
           npm run all
   test: # make sure the action works on a clean machine without building
     runs-on: ubuntu-latest
+    env: 
+      POSTMAN_API_KEY: ${{ secrets.POSTMAN_API_KEY }}
+      WORKSPACE_ID: ${{ secrets.TEST_POSTMAN_WORKSPACE_ID }}
     steps:
       - uses: actions/checkout@v2
       - uses: ./
         with:
-          api-key: fake
-          workspace-id: fake
-          collection-path: fake
+          api-key: ${POSTMAN_API_KEY}
+          workspace-id: ${WORKSPACE_ID}
+          collection-path: example-collection.json
