@@ -14,7 +14,7 @@ steps:
     with:
       api-key: ${{ secrets.POSTMAN_API_KEY }}
       workspace-id: ${{ secrets.POSTMAN_WORKSPACE_ID }}
-      collection-path: path/to/collection.json`
+      collection-path: path/to/collection.json
 ```
 ## Contributing
 
