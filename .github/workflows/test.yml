@@ -24,6 +24,6 @@ jobs:
       - uses: actions/checkout@v2
       - uses: ./
         with:
-          api-key: ${POSTMAN_API_KEY}
-          workspace-id: ${WORKSPACE_ID}
+          api-key: ${{ secrets.POSTMAN_API_KEY }}
+          workspace-id:  ${{ secrets.TEST_POSTMAN_WORKSPACE_ID }}
           collection-path: example-collection.json
