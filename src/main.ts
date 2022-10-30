@@ -1,8 +1,8 @@
 import * as core from "@actions/core";
+import { Collection, CollectionDefinition } from "postman-collection";
 import { FernPostmanClient } from "@fern-fern/postman-sdk";
 import { PostmanCollectionSchema } from "@fern-fern/postman-sdk/resources";
 import { readFile } from "fs/promises";
-import { Collection, CollectionDefinition } from "postman-collection";
 
 async function run(): Promise<void> {
     try {
@@ -25,14 +25,13 @@ async function run(): Promise<void> {
             });
         if (!collectionMetadataResponse.ok) {
             throw new Error(
-                "Failed to load collection metadata: " +
-                    collectionMetadataResponse.error
+                `Failed to load collection metadata: ${collectionMetadataResponse.error}`
             );
         }
         const collectionMetadata =
             collectionMetadataResponse.body.collections.find(
-                (collectionMetadata) => {
-                    collectionMetadata.name === postmanCollection.info.name;
+                (collectionMetadataItem) => {
+                    collectionMetadataItem.name === postmanCollection.info.name;
                 }
             );
         const collectionDefinition: CollectionDefinition = {
@@ -60,8 +59,7 @@ async function run(): Promise<void> {
                 });
             if (!updateCollectionResponse.ok) {
                 throw new Error(
-                    "Failed to update collection: " +
-                        updateCollectionResponse.error
+                    `Failed to update collection: ${updateCollectionResponse.error}`
                 );
             }
             core.info(`Successfully updated collection!`);
@@ -75,8 +73,7 @@ async function run(): Promise<void> {
                 });
             if (!createCollectionResponse.ok) {
                 throw new Error(
-                    "Failed to create collection: " +
-                        createCollectionResponse.error
+                    `Failed to create collection: ${createCollectionResponse.error}`
                 );
             }
             core.info(`Successfully created collection!`);
