@@ -19,13 +19,27 @@ async function run(): Promise<void> {
                 apiKey: postmanApiKey,
             },
         });
+
+        const getWorkspaceResponse = await postmanClient.workspace.getWorkspace(
+            {
+                workspaceId: postmanWorkspaceId,
+            }
+        );
+        if (!getWorkspaceResponse.ok) {
+            throw new Error(
+                `Failed to load workspace: ${JSON.stringify(
+                    getWorkspaceResponse.error
+                )}`
+            );
+        }
+
         const collectionMetadataResponse =
             await postmanClient.collection.getAllCollectionMetadata({
                 workspace: postmanWorkspaceId,
             });
         if (!collectionMetadataResponse.ok) {
             throw new Error(
-                `Failed to load collection metadata: ${JSON.stringify(
+                `Failed to load collection metadata from workspace: ${JSON.stringify(
                     collectionMetadataResponse.error
                 )}`
             );
@@ -61,12 +75,19 @@ async function run(): Promise<void> {
                 });
             if (!updateCollectionResponse.ok) {
                 throw new Error(
-                    `Failed to update collection: ${JSON.stringify(
-                        updateCollectionResponse.error
+                    `Failed to update collection in workspace ${
+                        getWorkspaceResponse.body.name
+                    }. 
+                    ${JSON.stringify(
+                        updateCollectionResponse.error,
+                        undefined,
+                        2
                     )}`
                 );
             }
-            core.info(`Successfully updated collection!`);
+            core.info(
+                `Successfully updated collection in workspace ${getWorkspaceResponse.body.name}!`
+            );
         } else {
             const createCollectionResponse =
                 await postmanClient.collection.createCollection({
@@ -77,12 +98,19 @@ async function run(): Promise<void> {
                 });
             if (!createCollectionResponse.ok) {
                 throw new Error(
-                    `Failed to create collection: ${JSON.stringify(
-                        createCollectionResponse.error
+                    `Failed to create collection in workspace ${
+                        getWorkspaceResponse.body.name
+                    }. 
+                    ${JSON.stringify(
+                        createCollectionResponse.error,
+                        undefined,
+                        2
                     )}`
                 );
             }
-            core.info(`Successfully created collection!`);
+            core.info(
+                `Successfully created collection in workspace ${getWorkspaceResponse.body.name}!`
+            );
         }
     } catch (error) {
         if (error instanceof Error) core.setFailed(error.message);
