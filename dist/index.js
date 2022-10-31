@@ -69,10 +69,7 @@ function run() {
             if (!collectionMetadataResponse.ok) {
                 throw new Error(`Failed to load collection metadata from workspace: ${JSON.stringify(collectionMetadataResponse.error)}`);
             }
-            core.info(`Received the following collection metadata: ${JSON.stringify(collectionMetadataResponse.body)}`);
-            const collectionMetadata = collectionMetadataResponse.body.collections.find((collectionMetadataItem) => {
-                collectionMetadataItem.name === postmanCollection.info.name;
-            });
+            const collectionMetadata = collectionMetadataResponse.body.collections.find((collectionMetadataItem) => collectionMetadataItem.name === postmanCollection.info.name);
             const collectionDefinition = Object.assign(Object.assign({}, postmanCollection), { auth: postmanCollection.auth != null
                     ? postmanCollection.auth._visit({
                         basic: () => {
