@@ -50,6 +50,7 @@ function run() {
             const postmanWorkspaceId = core.getInput("workspace-id");
             const postmanCollectionPath = core.getInput("collection-path");
             const postmanCollection = JSON.parse((yield (0, promises_1.readFile)(postmanCollectionPath)).toString());
+            console.log(`Read collection ${postmanCollection.info.name} from ${postmanCollectionPath}.`);
             const postmanClient = new postman_sdk_1.FernPostmanClient({
                 auth: {
                     apiKey: postmanApiKey,
@@ -61,6 +62,7 @@ function run() {
             if (!getWorkspaceResponse.ok) {
                 throw new Error(`Failed to load workspace: ${JSON.stringify(getWorkspaceResponse.error)}`);
             }
+            const workspaceName = getWorkspaceResponse.body.workspace.name;
             const collectionMetadataResponse = yield postmanClient.collection.getAllCollectionMetadata({
                 workspace: postmanWorkspaceId,
             });
@@ -89,10 +91,10 @@ function run() {
                     },
                 });
                 if (!updateCollectionResponse.ok) {
-                    throw new Error(`Failed to update collection in workspace ${getWorkspaceResponse.body.name}. 
+                    throw new Error(`Failed to update collection in workspace ${getWorkspaceResponse.body.workspace.name}. 
                     ${JSON.stringify(updateCollectionResponse.error, undefined, 2)}`);
                 }
-                core.info(`Successfully updated collection in workspace ${getWorkspaceResponse.body.name}!`);
+                core.info(`Successfully updated collection in workspace ${workspaceName}!`);
             }
             else {
                 const createCollectionResponse = yield postmanClient.collection.createCollection({
@@ -102,10 +104,10 @@ function run() {
                     },
                 });
                 if (!createCollectionResponse.ok) {
-                    throw new Error(`Failed to create collection in workspace ${getWorkspaceResponse.body.name}. 
+                    throw new Error(`Failed to create collection in workspace ${workspaceName}. 
                     ${JSON.stringify(createCollectionResponse.error, undefined, 2)}`);
                 }
-                core.info(`Successfully created collection in workspace ${getWorkspaceResponse.body.name}!`);
+                core.info(`Successfully created collection in workspace ${workspaceName}!`);
             }
         }
         catch (error) {
@@ -34293,7 +34295,7 @@ class Client {
     if (response.ok) {
       return {
         ok: true,
-        body: serializers.workspace.Workspace.parse(response.body)
+        body: serializers.workspace.GetWorkspaceResponse.parse(response.body)
       };
     }
     return {
@@ -34400,6 +34402,31 @@ __reExport(workspace_exports, __nccwpck_require__(86865), module.exports);
 
 /***/ }),
 
+/***/ 29168:
+/***/ ((module) => {
+
+"use strict";
+
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var GetWorkspaceResponse_exports = {};
+module.exports = __toCommonJS(GetWorkspaceResponse_exports);
+//# sourceMappingURL=GetWorkspaceResponse.js.map
+
+
+/***/ }),
+
 /***/ 20474:
 /***/ ((module) => {
 
@@ -34472,6 +34499,7 @@ var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: tru
 var types_exports = {};
 module.exports = __toCommonJS(types_exports);
 __reExport(types_exports, __nccwpck_require__(47949), module.exports);
+__reExport(types_exports, __nccwpck_require__(29168), module.exports);
 __reExport(types_exports, __nccwpck_require__(20474), module.exports);
 //# sourceMappingURL=index.js.map
 
@@ -35599,6 +35627,46 @@ __reExport(workspace_exports, __nccwpck_require__(79250), module.exports);
 
 /***/ }),
 
+/***/ 16271:
+/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
+
+"use strict";
+
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var GetWorkspaceResponse_exports = {};
+__export(GetWorkspaceResponse_exports, {
+  GetWorkspaceResponse: () => GetWorkspaceResponse
+});
+module.exports = __toCommonJS(GetWorkspaceResponse_exports);
+var core = __toESM(__nccwpck_require__(30314));
+var serializers = __toESM(__nccwpck_require__(41660));
+const GetWorkspaceResponse = core.schemas.object({
+  workspace: core.schemas.lazyObject(() => serializers.workspace.Workspace)
+});
+//# sourceMappingURL=GetWorkspaceResponse.js.map
+
+
+/***/ }),
+
 /***/ 85939:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
@@ -35699,6 +35767,7 @@ var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: tru
 var types_exports = {};
 module.exports = __toCommonJS(types_exports);
 __reExport(types_exports, __nccwpck_require__(39354), module.exports);
+__reExport(types_exports, __nccwpck_require__(16271), module.exports);
 __reExport(types_exports, __nccwpck_require__(85939), module.exports);
 //# sourceMappingURL=index.js.map
 

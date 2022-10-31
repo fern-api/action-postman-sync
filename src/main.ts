@@ -13,6 +13,9 @@ async function run(): Promise<void> {
         const postmanCollection = JSON.parse(
             (await readFile(postmanCollectionPath)).toString()
         ) as PostmanCollectionSchema;
+        console.log(
+            `Read collection ${postmanCollection.info.name} from ${postmanCollectionPath}.`
+        );
 
         const postmanClient = new FernPostmanClient({
             auth: {
@@ -32,6 +35,7 @@ async function run(): Promise<void> {
                 )}`
             );
         }
+        const workspaceName = getWorkspaceResponse.body.workspace.name;
 
         const collectionMetadataResponse =
             await postmanClient.collection.getAllCollectionMetadata({
@@ -76,7 +80,7 @@ async function run(): Promise<void> {
             if (!updateCollectionResponse.ok) {
                 throw new Error(
                     `Failed to update collection in workspace ${
-                        getWorkspaceResponse.body.name
+                        getWorkspaceResponse.body.workspace.name
                     }. 
                     ${JSON.stringify(
                         updateCollectionResponse.error,
@@ -86,7 +90,7 @@ async function run(): Promise<void> {
                 );
             }
             core.info(
-                `Successfully updated collection in workspace ${getWorkspaceResponse.body.name}!`
+                `Successfully updated collection in workspace ${workspaceName}!`
             );
         } else {
             const createCollectionResponse =
@@ -98,9 +102,7 @@ async function run(): Promise<void> {
                 });
             if (!createCollectionResponse.ok) {
                 throw new Error(
-                    `Failed to create collection in workspace ${
-                        getWorkspaceResponse.body.name
-                    }. 
+                    `Failed to create collection in workspace ${workspaceName}. 
                     ${JSON.stringify(
                         createCollectionResponse.error,
                         undefined,
@@ -109,7 +111,7 @@ async function run(): Promise<void> {
                 );
             }
             core.info(
-                `Successfully created collection in workspace ${getWorkspaceResponse.body.name}!`
+                `Successfully created collection in workspace ${workspaceName}!`
             );
         }
     } catch (error) {
