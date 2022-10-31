@@ -13,7 +13,7 @@ async function run(): Promise<void> {
         const postmanCollection = JSON.parse(
             (await readFile(postmanCollectionPath)).toString()
         ) as PostmanCollectionSchema;
-        console.log(
+        core.info(
             `Read collection ${postmanCollection.info.name} from ${postmanCollectionPath}.`
         );
 
