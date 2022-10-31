@@ -48,6 +48,12 @@ async function run(): Promise<void> {
                 )}`
             );
         }
+        core.info(
+            `Received the following collection metadata: ${JSON.stringify(
+                collectionMetadataResponse.body
+            )}`
+        );
+
         const collectionMetadata =
             collectionMetadataResponse.body.collections.find(
                 (collectionMetadataItem) => {
