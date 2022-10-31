@@ -50,7 +50,7 @@ function run() {
             const postmanWorkspaceId = core.getInput("workspace-id");
             const postmanCollectionPath = core.getInput("collection-path");
             const postmanCollection = JSON.parse((yield (0, promises_1.readFile)(postmanCollectionPath)).toString());
-            console.log(`Read collection ${postmanCollection.info.name} from ${postmanCollectionPath}.`);
+            core.info(`Read collection ${postmanCollection.info.name} from ${postmanCollectionPath}.`);
             const postmanClient = new postman_sdk_1.FernPostmanClient({
                 auth: {
                     apiKey: postmanApiKey,
@@ -69,6 +69,7 @@ function run() {
             if (!collectionMetadataResponse.ok) {
                 throw new Error(`Failed to load collection metadata from workspace: ${JSON.stringify(collectionMetadataResponse.error)}`);
             }
+            core.info(`Received the following collection metadata: ${JSON.stringify(collectionMetadataResponse.body)}`);
             const collectionMetadata = collectionMetadataResponse.body.collections.find((collectionMetadataItem) => {
                 collectionMetadataItem.name === postmanCollection.info.name;
             });
