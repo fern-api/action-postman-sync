@@ -1,7 +1,7 @@
+import * as PostmanParsing from "@fern-fern/postman-sdk/serialization";
 import * as core from "@actions/core";
 import { Collection, CollectionDefinition } from "postman-collection";
 import { FernPostmanClient } from "@fern-fern/postman-sdk";
-import { PostmanCollectionSchema } from "@fern-fern/postman-sdk/resources";
 import { readFile } from "fs/promises";
 
 async function run(): Promise<void> {
@@ -10,9 +10,11 @@ async function run(): Promise<void> {
         const postmanWorkspaceId: string = core.getInput("workspace-id");
         const postmanCollectionPath: string = core.getInput("collection-path");
 
-        const postmanCollection = JSON.parse(
+        const rawPostmanCollection = JSON.parse(
             (await readFile(postmanCollectionPath)).toString()
-        ) as PostmanCollectionSchema;
+        );
+        const postmanCollection =
+            PostmanParsing.PostmanCollectionSchema.parse(rawPostmanCollection);
         core.info(
             `Read collection ${postmanCollection.info.name} from ${postmanCollectionPath}.`
         );
