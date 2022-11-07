@@ -39,6 +39,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
+const PostmanParsing = __importStar(__nccwpck_require__(41660));
 const core = __importStar(__nccwpck_require__(42186));
 const postman_collection_1 = __nccwpck_require__(36435);
 const postman_sdk_1 = __nccwpck_require__(33062);
@@ -49,7 +50,8 @@ function run() {
             const postmanApiKey = core.getInput("api-key");
             const postmanWorkspaceId = core.getInput("workspace-id");
             const postmanCollectionPath = core.getInput("collection-path");
-            const postmanCollection = JSON.parse((yield (0, promises_1.readFile)(postmanCollectionPath)).toString());
+            const rawPostmanCollection = JSON.parse((yield (0, promises_1.readFile)(postmanCollectionPath)).toString());
+            const postmanCollection = PostmanParsing.PostmanCollectionSchema.parse(rawPostmanCollection);
             core.info(`Read collection ${postmanCollection.info.name} from ${postmanCollectionPath}.`);
             const postmanClient = new postman_sdk_1.FernPostmanClient({
                 auth: {
@@ -13869,7 +13871,7 @@ credit_card.jcb = __nccwpck_require__(49422);
 credit_card.switch = __nccwpck_require__(84015);
 credit_card.solo = __nccwpck_require__(297);
 credit_card.maestro = __nccwpck_require__(11428);
-credit_card.laser = __nccwpck_require__(3454);
+credit_card.laser = __nccwpck_require__(44962);
 credit_card.instapayment = __nccwpck_require__(36613)
 
 
@@ -13897,7 +13899,7 @@ module["exports"] = [
 
 /***/ }),
 
-/***/ 3454:
+/***/ 44962:
 /***/ ((module) => {
 
 module["exports"] = [
@@ -36652,7 +36654,7 @@ module.exports = function httpAdapter(config) {
 
 /***/ }),
 
-/***/ 21479:
+/***/ 3454:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
 "use strict";
@@ -37777,7 +37779,7 @@ function getDefaultAdapter() {
   var adapter;
   if (typeof XMLHttpRequest !== 'undefined') {
     // For browsers use XHR adapter
-    adapter = __nccwpck_require__(21479);
+    adapter = __nccwpck_require__(3454);
   } else if (typeof process !== 'undefined' && Object.prototype.toString.call(process) === '[object process]') {
     // For node use HTTP adapter
     adapter = __nccwpck_require__(68104);
