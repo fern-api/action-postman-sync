@@ -12,12 +12,10 @@ async function run(): Promise<void> {
 
         const rawPostmanCollection = JSON.parse(
             (await readFile(postmanCollectionPath)).toString()
-        );
+        ) as PostmanParsing.PostmanCollectionSchema.Raw;
         const postmanCollection =
             PostmanParsing.PostmanCollectionSchema.parse(rawPostmanCollection);
-        core.info(
-            `Read collection ${postmanCollection.info.name} from ${postmanCollectionPath}.`
-        );
+        core.info(`Read collection from ${postmanCollectionPath}.`);
 
         const postmanClient = new FernPostmanClient({
             auth: {
@@ -57,15 +55,15 @@ async function run(): Promise<void> {
                     collectionMetadataItem.name === postmanCollection.info.name
             );
         const collectionDefinition: CollectionDefinition = {
-            ...postmanCollection,
+            ...rawPostmanCollection,
             auth:
                 postmanCollection.auth != null
                     ? postmanCollection.auth._visit({
                           basic: () => {
-                              return { ...postmanCollection.auth };
+                              return { ...rawPostmanCollection.auth };
                           },
                           bearer: () => {
-                              return { ...postmanCollection.auth };
+                              return { ...rawPostmanCollection.auth };
                           },
                           _other: () => undefined,
                       })
