@@ -61,6 +61,7 @@ function run() {
             const getWorkspaceResponse = yield postmanClient.workspace.getWorkspace({
                 workspaceId: postmanWorkspaceId,
             });
+            core.debug(`Received workspace: ${JSON.stringify(getWorkspaceResponse)}`);
             if (!getWorkspaceResponse.ok) {
                 throw new Error(`Failed to load workspace: ${JSON.stringify(getWorkspaceResponse.error)}`);
             }
@@ -68,6 +69,7 @@ function run() {
             const collectionMetadataResponse = yield postmanClient.collection.getAllCollectionMetadata({
                 workspace: postmanWorkspaceId,
             });
+            core.debug(`Received collection metadata: ${JSON.stringify(collectionMetadataResponse)}`);
             if (!collectionMetadataResponse.ok) {
                 throw new Error(`Failed to load collection metadata from workspace: ${JSON.stringify(collectionMetadataResponse.error)}`);
             }
@@ -90,6 +92,7 @@ function run() {
                         collection: new postman_collection_1.Collection(collectionDefinition),
                     },
                 });
+                core.debug(`Updated collection: ${JSON.stringify(updateCollectionResponse)}`);
                 if (!updateCollectionResponse.ok) {
                     throw new Error(`Failed to update collection in workspace ${getWorkspaceResponse.body.workspace.name}. 
                     ${JSON.stringify(updateCollectionResponse.error, undefined, 2)}`);
@@ -103,6 +106,7 @@ function run() {
                         collection: new postman_collection_1.Collection(collectionDefinition),
                     },
                 });
+                core.debug(`Created collection: ${JSON.stringify(createCollectionResponse)}`);
                 if (!createCollectionResponse.ok) {
                     throw new Error(`Failed to create collection in workspace ${workspaceName}. 
                     ${JSON.stringify(createCollectionResponse.error, undefined, 2)}`);

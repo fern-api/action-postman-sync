@@ -28,7 +28,7 @@ async function run(): Promise<void> {
                 workspaceId: postmanWorkspaceId,
             }
         );
-        core.info(
+        core.debug(
             `Received workspace: ${JSON.stringify(getWorkspaceResponse)}`
         );
         if (!getWorkspaceResponse.ok) {
@@ -44,7 +44,7 @@ async function run(): Promise<void> {
             await postmanClient.collection.getAllCollectionMetadata({
                 workspace: postmanWorkspaceId,
             });
-        core.info(
+        core.debug(
             `Received collection metadata: ${JSON.stringify(
                 collectionMetadataResponse
             )}`
@@ -85,7 +85,7 @@ async function run(): Promise<void> {
                         collection: new Collection(collectionDefinition),
                     },
                 });
-            core.info(
+            core.debug(
                 `Updated collection: ${JSON.stringify(
                     updateCollectionResponse
                 )}`
@@ -113,7 +113,7 @@ async function run(): Promise<void> {
                         collection: new Collection(collectionDefinition),
                     },
                 });
-            core.info(
+            core.debug(
                 `Created collection: ${JSON.stringify(
                     createCollectionResponse
                 )}`
