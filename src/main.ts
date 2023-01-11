@@ -4,11 +4,13 @@ import { Collection, CollectionDefinition } from "postman-collection";
 import { FernPostmanClient } from "@fern-fern/postman-sdk";
 import { readFile } from "fs/promises";
 
+void run();
+
 async function run(): Promise<void> {
     try {
-        const postmanApiKey: string = core.getInput("api-key");
-        const postmanWorkspaceId: string = core.getInput("workspace-id");
-        const postmanCollectionPath: string = core.getInput("collection-path");
+        const postmanApiKey = getStringInputOrThrow("api-key");
+        const postmanWorkspaceId = getStringInputOrThrow("workspace-id");
+        const postmanCollectionPath = getStringInputOrThrow("collection-path");
 
         const rawPostmanCollection = JSON.parse(
             (await readFile(postmanCollectionPath)).toString()
@@ -137,4 +139,13 @@ async function run(): Promise<void> {
     }
 }
 
-run();
+function getStringInputOrThrow(key: string): string {
+    const input: unknown = core.getInput(key);
+    if (input == null) {
+        throw new Error(`${key} is not defined.`);
+    }
+    if (typeof input !== "string") {
+        throw new Error(`${key} is not a string.`);
+    }
+    return input;
+}
