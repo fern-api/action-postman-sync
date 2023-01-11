@@ -28,6 +28,9 @@ async function run(): Promise<void> {
                 workspaceId: postmanWorkspaceId,
             }
         );
+        core.info(
+            `Received workspace: ${JSON.stringify(getWorkspaceResponse)}`
+        );
         if (!getWorkspaceResponse.ok) {
             throw new Error(
                 `Failed to load workspace: ${JSON.stringify(
@@ -41,6 +44,11 @@ async function run(): Promise<void> {
             await postmanClient.collection.getAllCollectionMetadata({
                 workspace: postmanWorkspaceId,
             });
+        core.info(
+            `Received collection metadata: ${JSON.stringify(
+                collectionMetadataResponse
+            )}`
+        );
         if (!collectionMetadataResponse.ok) {
             throw new Error(
                 `Failed to load collection metadata from workspace: ${JSON.stringify(
@@ -77,6 +85,11 @@ async function run(): Promise<void> {
                         collection: new Collection(collectionDefinition),
                     },
                 });
+            core.info(
+                `Updated collection: ${JSON.stringify(
+                    updateCollectionResponse
+                )}`
+            );
             if (!updateCollectionResponse.ok) {
                 throw new Error(
                     `Failed to update collection in workspace ${
@@ -100,6 +113,11 @@ async function run(): Promise<void> {
                         collection: new Collection(collectionDefinition),
                     },
                 });
+            core.info(
+                `Created collection: ${JSON.stringify(
+                    createCollectionResponse
+                )}`
+            );
             if (!createCollectionResponse.ok) {
                 throw new Error(
                     `Failed to create collection in workspace ${workspaceName}. 
