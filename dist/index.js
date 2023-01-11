@@ -44,12 +44,13 @@ const core = __importStar(__nccwpck_require__(42186));
 const postman_collection_1 = __nccwpck_require__(36435);
 const postman_sdk_1 = __nccwpck_require__(33062);
 const promises_1 = __nccwpck_require__(69225);
+void run();
 function run() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            const postmanApiKey = core.getInput("api-key");
-            const postmanWorkspaceId = core.getInput("workspace-id");
-            const postmanCollectionPath = core.getInput("collection-path");
+            const postmanApiKey = getStringInputOrThrow("api-key");
+            const postmanWorkspaceId = getStringInputOrThrow("workspace-id");
+            const postmanCollectionPath = getStringInputOrThrow("collection-path");
             const rawPostmanCollection = JSON.parse((yield (0, promises_1.readFile)(postmanCollectionPath)).toString());
             const postmanCollection = PostmanParsing.PostmanCollectionSchema.parse(rawPostmanCollection);
             core.info(`Read collection from ${postmanCollectionPath}.`);
@@ -120,7 +121,16 @@ function run() {
         }
     });
 }
-run();
+function getStringInputOrThrow(key) {
+    const input = core.getInput(key);
+    if (input == null) {
+        throw new Error(`${key} is not defined.`);
+    }
+    if (typeof input !== "string") {
+        throw new Error(`${key} is not a string.`);
+    }
+    return input;
+}
 
 
 /***/ }),
