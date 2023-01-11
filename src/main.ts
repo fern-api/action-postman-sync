@@ -141,11 +141,15 @@ async function run(): Promise<void> {
 
 function getStringInputOrThrow(key: string): string {
     const input: unknown = core.getInput(key);
-    if (input == null) {
+    if (input == null || isEmptyString(input)) {
         throw new Error(`${key} is not defined.`);
     }
     if (typeof input !== "string") {
         throw new Error(`${key} is not a string.`);
     }
     return input;
+}
+
+function isEmptyString(value: unknown): boolean {
+    return typeof value === "string" && value.length === 0;
 }

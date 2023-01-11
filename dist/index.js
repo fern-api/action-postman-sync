@@ -123,13 +123,16 @@ function run() {
 }
 function getStringInputOrThrow(key) {
     const input = core.getInput(key);
-    if (input == null) {
+    if (input == null || isEmptyString(input)) {
         throw new Error(`${key} is not defined.`);
     }
     if (typeof input !== "string") {
         throw new Error(`${key} is not a string.`);
     }
     return input;
+}
+function isEmptyString(value) {
+    return typeof value === "string" && value.length === 0;
 }
 
 
