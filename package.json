@@ -30,7 +30,7 @@
     "postman-collection": "^4.1.4"
   },
   "devDependencies": {
-    "@types/node": "^18.11.0",
+    "@types/node": "^20.11.16",
     "@types/postman-collection": "^3.5.7",
     "@typescript-eslint/parser": "^4.33.0",
     "@vercel/ncc": "^0.31.1",
